@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRQ Project | Jonathan West</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='22' font-size='14' fill='white' font-family='monospace' font-weight='bold' x='7'>JW</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;--muted:#64748B;--muted-2:#94A3B8;--rule:#E2E8F0;--blue:#2563EB;--blue-2:#1D4ED8;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);--green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink)}
+.nav-mark{width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--ink);background:var(--off)}
+.nav-links a.active{color:var(--blue);background:var(--blue-bg)}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none;transition:background .15s}
+.nav-cta:hover{background:var(--blue-2)}
+.page-hero{padding:64px 40px 48px;background:var(--sky);border-bottom:1px solid var(--rule)}
+.page-hero-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+.page-title{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:16px}
+.page-sub{font-size:17px;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:28px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:20px}
+.tag-blue{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
+.tag-green{background:var(--green-bg);border:1px solid rgba(22,163,74,.2);color:var(--green)}
+.content{max-width:1100px;margin:0 auto;padding:64px 40px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.section-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:20px}
+h3{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:10px}
+p{font-size:15px;color:var(--ink-2);line-height:1.8;margin-bottom:14px}
+p:last-child{margin-bottom:0}
+
+/* DEMO */
+.demo-shell{background:var(--white);border:1.5px solid var(--rule);border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.06);margin-bottom:48px}
+.demo-bar{background:var(--off);border-bottom:1px solid var(--rule);padding:14px 20px;display:flex;align-items:center;gap:10px}
+.dots{display:flex;gap:6px}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot-r{background:#FF5F57}.dot-y{background:#FEBC2E}.dot-g{background:#28C840}
+.demo-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin:0 auto}
+.demo-body{padding:40px}
+.progress-wrap{height:4px;background:var(--rule);border-radius:2px;margin-bottom:28px;overflow:hidden}
+.progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width .4s ease}
+.steps{display:flex;gap:6px;margin-bottom:32px;padding:4px;background:var(--off);border-radius:10px;border:1px solid var(--rule)}
+.step{flex:1;padding:8px 10px;border-radius:7px;font-size:12px;font-weight:600;text-align:center;color:var(--muted);cursor:pointer;transition:background .2s,color .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.step.active{background:var(--blue);color:#fff}
+.step.done{color:var(--green)}
+.step-n{width:18px;height:18px;border-radius:50%;background:var(--rule);font-size:10px;display:flex;align-items:center;justify-content:center}
+.step.active .step-n{background:rgba(255,255,255,.25)}
+.step.done .step-n{background:var(--green-bg);color:var(--green)}
+.panel{display:none;animation:fadeup .3s ease}
+.panel.active{display:block}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.field-group{margin-bottom:20px}
+.field-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.req{color:var(--blue);font-size:11px;font-family:'JetBrains Mono',monospace}
+.field-input,.field-select{width:100%;background:var(--off);border:1.5px solid var(--rule);border-radius:9px;padding:11px 14px;color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;transition:border-color .15s,box-shadow .15s}
+.field-input:focus,.field-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.field-input::placeholder{color:var(--muted-2)}
+.field-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%2364748B'%3E%3Cpath d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 14px;border-radius:8px;border:1.5px solid var(--rule);font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.on{background:var(--blue-bg);border-color:var(--blue);color:var(--blue)}
+.panel-actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:20px;border-top:1px solid var(--rule)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:background .15s,transform .15s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-2);transform:translateY(-1px)}
+.btn-ghost{background:var(--white);color:var(--ink);border:1.5px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.step-hint{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+/* SUCCESS */
+.success{display:none;text-align:center;padding:32px}
+.success-icon{font-size:48px;margin-bottom:16px;animation:bounce .6s ease}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.success-title{font-size:22px;font-weight:800;color:var(--ink);margin-bottom:8px}
+.success-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.summary-box{background:var(--off);border:1px solid var(--rule);border-radius:12px;padding:20px;text-align:left;margin-bottom:20px}
+.summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--rule);font-size:13px}
+.summary-row:last-child{border-bottom:none}
+.sum-k{color:var(--muted)}.sum-v{font-weight:700;color:var(--ink)}
+
+/* CASE STUDY BLOCKS */
+.flow{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);border-radius:16px;overflow:hidden;margin-bottom:48px}
+.flow-step{display:grid;grid-template-columns:80px 1fr;gap:24px;padding:28px;border-bottom:1px solid var(--rule);transition:background .15s}
+.flow-step:last-child{border-bottom:none}
+.flow-step:hover{background:var(--sky)}
+.flow-num{width:36px;height:36px;border-radius:10px;background:var(--blue);color:#fff;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.flow-text{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* METRICS */
+.metrics-row{display:flex;gap:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:var(--white)}
+.mc{flex:1;padding:28px 24px;text-align:center;border-right:1px solid var(--rule);transition:background .15s}
+.mc:last-child{border-right:none}
+.mc:hover{background:var(--sky)}
+.mc-v{font-size:30px;font-weight:900;letter-spacing:-.02em;color:var(--blue);margin-bottom:5px}
+.mc-k{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* INSIGHT */
+.insight{background:var(--sky);border:1px solid var(--blue-border);border-radius:14px;padding:28px;border-left:4px solid var(--blue);margin-bottom:32px}
+.insight-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.insight-text{font-size:15px;color:var(--ink-2);line-height:1.7;font-weight:500}
+
+.footer{border-top:1px solid var(--rule);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--blue)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}
+@media(max-width:768px){.nav{padding:0 20px}.nav-links{display:none}.page-hero,.content{padding-left:20px;padding-right:20px}.two-col{grid-template-columns:1fr}.demo-body{padding:20px}.flow-step{grid-template-columns:1fr;gap:12px}.metrics-row{flex-direction:column}.mc{border-right:none;border-bottom:1px solid var(--rule)}.mc:last-child{border-bottom:none}.footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html"><div class="nav-mark">JW</div>Jonathan West</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="brq.html" class="active">BRQ Project</a></li>
+    <li><a href="spotify.html">Teardown</a></li>
+    <li><a href="decisions.html">Decisions</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">Get in touch</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Room 01</div>
+    <h1 class="page-title">The BRQ Project</h1>
+    <p class="page-sub">A guided client intake experience that replaces a static Word document. Try the prototype, then read how I built it.</p>
+    <div class="tags">
+      <span class="tag tag-blue">0 to 1</span>
+      <span class="tag tag-blue">Internal Tool</span>
+      <span class="tag tag-green">Shipped & Adopted</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- DEMO -->
+  <div class="section-label reveal">01 / Try it</div>
+  <h2 class="reveal reveal-d1" style="margin-bottom:24px">A working prototype<br>of the intake wizard.</h2>
+  <p class="reveal reveal-d2" style="max-width:620px;margin-bottom:32px">This is a simplified version of the actual tool running on our PM team today. Fill it out to experience the flow that replaced a static Word document.</p>
+
+  <div class="demo-shell reveal reveal-d2">
+    <div class="demo-bar">
+      <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+      <div class="demo-label">BRQ Intake Wizard v2.0</div>
+    </div>
+    <div class="demo-body">
+      <div class="progress-wrap"><div class="progress-fill" id="prog" style="width:25%"></div></div>
+      <div class="steps">
+        <div class="step active" data-s="1"><span class="step-n">1</span>Client</div>
+        <div class="step" data-s="2"><span class="step-n">2</span>ERP</div>
+        <div class="step" data-s="3"><span class="step-n">3</span>Timeline</div>
+        <div class="step" data-s="4"><span class="step-n">4</span>Review</div>
+      </div>
+      <!-- Panel 1 -->
+      <div class="panel active" id="p1">
+        <div class="field-group"><div class="field-label">Institution name <span class="req">required</span></div><input class="field-input" id="f-name" placeholder="e.g. Lakeside Community College"></div>
+        <div class="field-group"><div class="field-label">Institution type</div><div class="chips" id="g-inst"><div class="chip" data-v="community">Community College</div><div class="chip" data-v="4year">4-Year University</div><div class="chip" data-v="private">Private Institution</div><div class="chip" data-v="system">Multi-Campus System</div></div></div>
+        <div class="field-group"><div class="field-label">Primary stakeholder email</div><input class="field-input" id="f-email" type="email" placeholder="it@institution.edu"></div>
+        <div class="panel-actions"><span class="step-hint">Step 1 of 4</span><button class="btn btn-primary" onclick="go(2)">Next →</button></div>
+      </div>
+      <!-- Panel 2 -->
+      <div class="panel" id="p2">
+        <div class="field-group"><div class="field-label">ERP system</div><select class="field-select" id="f-erp"><option value="">Select ERP...</option><option>Ellucian Banner</option><option>Ellucian Colleague</option><option>PeopleSoft</option><option>Workday Student</option><option>Jenzabar</option><option>Other</option></select></div>
+        <div class="field-group"><div class="field-label">Integration method</div><div class="chips" id="g-int"><div class="chip" data-v="api">API Integration</div><div class="chip" data-v="sftp">SFTP File Transfer</div><div class="chip" data-v="manual">Manual Export</div></div></div>
+        <div class="field-group"><div class="field-label">AR codes to configure</div><select class="field-select" id="f-ar"><option value="">Select range...</option><option>1-5</option><option>6-15</option><option>16-30</option><option>30+</option></select></div>
+        <div class="panel-actions"><button class="btn btn-ghost" onclick="go(1)">← Back</button><button class="btn btn-primary" onclick="go(3)">Next →</button></div>
+      </div>
+      <!-- Panel 3 -->
+      <div class="panel" id="p3">
+        <div class="field-group"><div class="field-label">Target go-live date</div><input class="field-input" id="f-date" type="date"></div>
+        <div class="field-group"><div class="field-label">Academic calendar constraint?</div><div class="chips" id="g-ac"><div class="chip" data-v="yes">Yes — before semester start</div><div class="chip" data-v="flex">Flexible</div><div class="chip" data-v="none">No constraint</div></div></div>
+        <div class="field-group"><div class="field-label">Training preference</div><div class="chips" id="g-tr"><div class="chip" data-v="live">Live session</div><div class="chip" data-v="async">Async recording</div><div class="chip" data-v="both">Both</div></div></div>
+        <div class="panel-actions"><button class="btn btn-ghost" onclick="go(2)">← Back</button><button class="btn btn-primary" onclick="go(4)">Review →</button></div>
+      </div>
+      <!-- Panel 4: Review -->
+      <div class="panel" id="p4">
+        <div id="review-wrap"></div>
+        <div class="panel-actions"><button class="btn btn-ghost" onclick="go(3)">← Edit</button><button class="btn btn-primary" onclick="submit()">Submit ✓</button></div>
+      </div>
+      <!-- Success -->
+      <div class="success" id="success">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">Intake complete.</div>
+        <div class="success-sub">This is what the old Word doc never delivered: structured, clean, ready for kickoff.</div>
+        <div class="summary-box" id="sum-box"></div>
+        <button class="btn btn-ghost" onclick="reset()" style="margin:0 auto">Start over</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE STUDY -->
+  <div class="section-label reveal">02 / Behind the build</div>
+  <h2 class="reveal reveal-d1" style="margin-bottom:32px">How I thought about it<br>as a product problem.</h2>
+
+  <div class="flow reveal reveal-d2">
+    <div class="flow-step"><div><div class="flow-num">01</div></div><div><div class="flow-title">The problem I noticed</div><div class="flow-text">Every implementation started with a static Word document that clients filled out before kickoff. It didn't validate answers, didn't adapt based on what a client told us, and produced inconsistent data. PMs spent the first week of every project chasing missing information. That repetition across every project is what made it feel like a real product problem worth solving.</div></div></div>
+    <div class="flow-step"><div><div class="flow-num">02</div></div><div><div class="flow-title">How I scoped the fix</div><div class="flow-text">I didn't start with code. I mapped every BRQ field against how often it required follow-up clarification. High-failure fields needed better prompts. Irrelevant fields for certain client types needed to become conditional. The decision: build a guided, conditional intake flow that solves 80% of the problem in v1, rather than waiting to solve all of it perfectly.</div></div></div>
+    <div class="flow-step"><div><div class="flow-num">03</div></div><div><div class="flow-title">What I intentionally left out of v1</div><div class="flow-text">Autosave: adds state management complexity and privacy considerations. Skip it, ship a shorter flow first. Client-facing portal: out of scope for v1, this was an internal PM tool. Progress saving across sessions: deferred pending usage data on where clients actually drop off.</div></div></div>
+    <div class="flow-step"><div><div class="flow-num">04</div></div><div><div class="flow-title">What I'd do differently with a product team</div><div class="flow-text">Usage analytics from day one: which fields cause the most rework, where users drop off, how long completion actually takes. Right now I know it works because PMs tell me so. With a real product team I'd want the data to confirm it, and I'd use that data to drive v2 prioritization.</div></div></div>
+  </div>
+
+  <div class="insight reveal">
+    <div class="insight-label">What this says about how I think</div>
+    <div class="insight-text">I didn't wait for permission or a roadmap slot. I saw a problem costing real time across every project, scoped the smallest version of a fix that would actually work, and shipped it. That's the muscle I want to keep using — just with the resources and title of an actual product role.</div>
+  </div>
+
+  <div class="metrics-row reveal">
+    <div class="mc"><div class="mc-v">100%</div><div class="mc-k">Intake standardized</div></div>
+    <div class="mc"><div class="mc-v">~60 min</div><div class="mc-k">Saved per project</div></div>
+    <div class="mc"><div class="mc-v">Team-wide</div><div class="mc-k">Leadership adoption</div></div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <span>Jonathan West · Product Lab · Dallas, TX</span>
+  <div class="footer-links"><a href="spotify.html">Next: Teardown →</a><a href="index.html">Home</a><a href="contact.html">Contact</a></div>
+  <span>© 2026</span>
+</footer>
+
+<script>
+let cur = 1, data = {};
+function go(n) {
+  document.getElementById('p'+cur).classList.remove('active');
+  document.querySelectorAll('.step').forEach((s,i) => {
+    s.classList.remove('active');
+    if (i+1 < n) s.classList.add('done'); else s.classList.remove('done');
+    if (i+1 === n) s.classList.add('active');
+  });
+  cur = n;
+  document.getElementById('p'+n).classList.add('active');
+  document.getElementById('prog').style.width = (n/4*100)+'%';
+  if (n===4) buildReview();
+}
+function val(id){ return document.getElementById(id)?.value||''; }
+function chip(gid){ return document.querySelector('#'+gid+' .on')?.dataset.v||''; }
+function buildReview(){
+  data = {name:val('f-name'),email:val('f-email'),erp:val('f-erp'),ar:val('f-ar'),date:val('f-date'),inst:chip('g-inst'),int:chip('g-int'),ac:chip('g-ac'),tr:chip('g-tr')};
+  const rows = [['Institution',data.name||'(not provided)'],['Email',data.email||'(not provided)'],['Type',data.inst||'(not selected)'],['ERP',data.erp||'(not provided)'],['Integration',data.int||'(not selected)'],['AR codes',data.ar||'(not provided)'],['Go-live',data.date||'(not set)']];
+  document.getElementById('review-wrap').innerHTML = `<div style="margin-bottom:20px"><div style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px">Review your intake</div><div style="font-size:13px;color:var(--muted)">Confirm before submitting.</div></div><div style="background:var(--off);border:1px solid var(--rule);border-radius:12px;overflow:hidden">${rows.map(([k,v])=>`<div class="summary-row"><span class="sum-k">${k}</span><span class="sum-v">${v}</span></div>`).join('')}</div>`;
+}
+function submit(){
+  ['p1','p2','p3','p4'].forEach(id=>{ const el=document.getElementById(id); if(el){el.classList.remove('active');el.style.display='none';}});
+  document.querySelector('.steps').style.display='none';
+  document.querySelector('.progress-wrap').style.display='none';
+  const s = document.getElementById('success'); s.style.display='block';
+  document.getElementById('sum-box').innerHTML = [['Institution',data.name||'(not provided)'],['ERP',data.erp||'(not provided)'],['Integration',data.int||'(not selected)'],['AR Codes',data.ar||'(not provided)']].map(([k,v])=>`<div class="summary-row"><span class="sum-k">${k}</span><span class="sum-v">${v}</span></div>`).join('');
+}
+function reset(){
+  document.querySelectorAll('.panel').forEach(p=>{p.classList.remove('active');p.style.display='';});
+  document.getElementById('success').style.display='none';
+  document.querySelector('.steps').style.display='';
+  document.querySelector('.progress-wrap').style.display='';
+  document.getElementById('p1').classList.add('active');
+  document.querySelectorAll('.step').forEach((s,i)=>{s.classList.remove('active','done');if(i===0)s.classList.add('active');});
+  document.getElementById('prog').style.width='25%';
+  ['f-name','f-email','f-erp','f-ar','f-date'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  cur=1; data={};
+}
+document.querySelectorAll('.chips').forEach(g=>{
+  g.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click',()=>{ g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); c.classList.add('on'); });
+  });
+});
+const ro = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

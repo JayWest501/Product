@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Jonathan West</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='22' font-size='14' fill='white' font-family='monospace' font-weight='bold' x='7'>JW</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;--muted:#64748B;--rule:#E2E8F0;--blue:#2563EB;--blue-2:#1D4ED8;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);--green:#16A34A;--green-bg:#F0FDF4}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink)}
+.nav-mark{width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--ink);background:var(--off)}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none}
+
+.contact-section{min-height:calc(100vh - 60px);display:flex;align-items:center;padding:64px 40px}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.2fr 0.8fr;gap:80px;align-items:start;width:100%}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.section-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+.contact-heading{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:20px}
+.contact-heading span{color:var(--blue)}
+.contact-sub{font-size:16px;color:var(--muted);line-height:1.75;max-width:480px}
+.status-pill{display:inline-flex;align-items:center;gap:8px;background:var(--green-bg);border:1px solid rgba(22,163,74,.2);padding:8px 16px;border-radius:20px;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--green)}
+.s-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 6px rgba(22,163,74,0)}}
+.clinks{display:flex;flex-direction:column;gap:10px}
+.clink{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border:1.5px solid var(--rule);border-radius:14px;text-decoration:none;color:var(--ink);transition:border-color .2s,background .2s,transform .15s}
+.clink:hover{border-color:var(--blue-border);background:var(--sky);transform:translateX(4px)}
+.cl-l{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:3px}
+.cl-v{font-size:14px;font-weight:600;color:var(--ink)}
+.cl-a{font-size:18px;color:var(--rule);transition:color .2s}
+.clink:hover .cl-a{color:var(--blue)}
+.explore-wrap{margin-top:32px;padding-top:24px;border-top:1px solid var(--rule)}
+.explore-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.explore-links{display:flex;flex-direction:column;gap:8px}
+.explore-link{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9px;text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:500;transition:background .15s,color .15s}
+.explore-link:hover{background:var(--sky);color:var(--blue)}
+.explore-icon{font-size:16px;width:20px}
+
+.footer{border-top:1px solid var(--rule);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--muted);text-decoration:none}
+.footer-links a:hover{color:var(--blue)}
+@media(max-width:768px){.nav{padding:0 20px}.nav-links{display:none}.contact-section{padding:40px 20px;align-items:flex-start}.contact-inner{grid-template-columns:1fr;gap:40px}.footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html"><div class="nav-mark">JW</div>Jonathan West</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="brq.html">BRQ Project</a></li>
+    <li><a href="spotify.html">Teardown</a></li>
+    <li><a href="decisions.html">Decisions</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html" style="background:var(--blue-2)">Contact</a>
+</nav>
+
+<section class="contact-section">
+  <div class="contact-inner">
+    <div>
+      <div class="section-label">Get in touch</div>
+      <h1 class="contact-heading">Let's talk about<br>what I'd build <span>next.</span></h1>
+      <p class="contact-sub">I'm not pretending to have years of PM titles. I'm showing you how I think and asking for the chance to do it on purpose. Open to Associate PM roles at SaaS companies — especially in enterprise, higher ed, or workflow tooling.</p>
+      <div class="status-pill"><span class="s-dot"></span> Actively looking — available immediately</div>
+    </div>
+    <div>
+      <div class="clinks">
+        <a class="clink" href="mailto:jonathan.west501@gmail.com">
+          <div><div class="cl-l">Email</div><div class="cl-v">jonathan.west501@gmail.com</div></div>
+          <span class="cl-a">↗</span>
+        </a>
+        <a class="clink" href="https://linkedin.com/in/jonathanwest501" target="_blank">
+          <div><div class="cl-l">LinkedIn</div><div class="cl-v">linkedin.com/in/jonathanwest501</div></div>
+          <span class="cl-a">↗</span>
+        </a>
+        <a class="clink" href="tel:5016136997">
+          <div><div class="cl-l">Phone</div><div class="cl-v">(501) 613-6997</div></div>
+          <span class="cl-a">↗</span>
+        </a>
+        <a class="clink" href="https://jaywest501.github.io/PMPortfolio/" target="_blank">
+          <div><div class="cl-l">PM Portfolio</div><div class="cl-v">jaywest501.github.io/PMPortfolio</div></div>
+          <span class="cl-a">↗</span>
+        </a>
+      </div>
+      <div class="explore-wrap">
+        <div class="explore-label">Explore the product lab</div>
+        <div class="explore-links">
+          <a class="explore-link" href="brq.html"><span class="explore-icon">🛠️</span> BRQ Project — try the prototype</a>
+          <a class="explore-link" href="spotify.html"><span class="explore-icon">🎧</span> Spotify Teardown — 5 tabs of product thinking</a>
+          <a class="explore-link" href="decisions.html"><span class="explore-icon">📓</span> Decision Journal — the thinking behind the work</a>
+          <a class="explore-link" href="about.html"><span class="explore-icon">👤</span> About — the full story</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>Jonathan West · Product Lab · Dallas, TX · © 2026</span>
+  <div class="footer-links"><a href="index.html">Home</a><a href="brq.html">BRQ</a><a href="spotify.html">Teardown</a></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan West | Product Lab</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='22' font-size='14' fill='white' font-family='monospace' font-weight='bold' x='7'>JW</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;--muted:#64748B;--muted-2:#94A3B8;--rule:#E2E8F0;--blue:#2563EB;--blue-2:#1D4ED8;--blue-3:#3B82F6;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);--green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink)}
+.nav-mark{width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--ink);background:var(--off)}
+.nav-links a.active{color:var(--blue);background:var(--blue-bg)}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none;transition:background .15s,transform .15s}
+.nav-cta:hover{background:var(--blue-2);transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:100px 40px 80px;text-align:center;position:relative;overflow:hidden;background:var(--white)}
+.hero-glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(37,99,235,0.07) 0%,transparent 65%);pointer-events:none;z-index:0}
+.hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-bg);border:1px solid var(--blue-border);padding:7px 16px;border-radius:20px;margin-bottom:32px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--blue)}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 6px rgba(22,163,74,0)}}
+.hero-name{font-size:clamp(52px,8vw,96px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--ink);margin-bottom:24px}
+.hero-name .blue{color:var(--blue)}
+.hero-sub{font-size:clamp(17px,2.2vw,21px);color:var(--muted);line-height:1.7;max-width:620px;margin:0 auto 40px}
+.hero-sub strong{color:var(--ink);font-weight:700}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:background .15s,transform .15s,box-shadow .15s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.3)}
+.btn-ghost{background:var(--white);color:var(--ink);border:1.5px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--blue);overflow:hidden;white-space:nowrap;padding:14px 0;margin-bottom:0}
+.marquee-track{display:inline-flex;animation:marquee 30s linear infinite}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused}
+.marquee-item{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);padding:0 28px}
+.marquee-item::after{content:'◆';margin-left:28px;color:rgba(255,255,255,0.3);font-size:8px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ABOUT STRIP */
+.about-strip{background:var(--sky);border-bottom:1px solid var(--rule);padding:40px;text-align:center}
+.about-strip-inner{max-width:700px;margin:0 auto}
+.about-strip p{font-size:16px;color:var(--ink-2);line-height:1.8}
+.about-strip p strong{color:var(--ink);font-weight:700}
+
+/* ROOMS */
+.rooms-section{padding:80px 40px;background:var(--white)}
+.rooms-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.section-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+.section-title{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:var(--ink);margin-bottom:48px}
+.rooms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.room-card{background:var(--white);border:1.5px solid var(--rule);border-radius:16px;padding:32px;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.room-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--blue-bg),transparent 60%);opacity:0;transition:opacity .25s}
+.room-card:hover{border-color:var(--blue-border);transform:translateY(-4px);box-shadow:0 16px 40px rgba(37,99,235,.1)}
+.room-card:hover::before{opacity:1}
+.room-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;position:relative;z-index:1}
+.room-icon{font-size:32px;margin-bottom:16px;position:relative;z-index:1}
+.room-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;position:relative;z-index:1}
+.room-desc{font-size:14px;color:var(--muted);line-height:1.65;flex:1;position:relative;z-index:1;margin-bottom:20px}
+.room-cta{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:6px;position:relative;z-index:1;transition:gap .2s}
+.room-card:hover .room-cta{gap:10px}
+
+/* METRICS */
+.metrics-section{background:var(--sky);padding:64px 40px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.metrics-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+.metric-cell{background:var(--white);padding:32px 24px;text-align:center;transition:background .15s}
+.metric-cell:hover{background:var(--sky)}
+.metric-val{font-size:36px;font-weight:900;letter-spacing:-.03em;color:var(--blue);margin-bottom:6px;line-height:1}
+.metric-key{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--rule);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--blue)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
+
+@media(max-width:768px){
+  .nav{padding:0 20px}.nav-links{display:none}
+  .hero{padding:80px 20px 56px}
+  .rooms-section,.metrics-section{padding:56px 20px}
+  .rooms-grid{grid-template-columns:1fr}
+  .metrics-inner{grid-template-columns:repeat(2,1fr)}
+  .about-strip{padding:32px 20px}
+  .footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html"><div class="nav-mark">JW</div>Jonathan West</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="brq.html">BRQ Project</a></li>
+    <li><a href="spotify.html">Teardown</a></li>
+    <li><a href="decisions.html">Decisions</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">Get in touch</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="badge-dot"></span> Open to Associate PM roles</div>
+    <h1 class="hero-name">Product <span class="blue">Lab.</span></h1>
+    <p class="hero-sub">I'm Jonathan West — an Implementation PM who spent three years watching where products break in the real world. I didn't wait for the title to start thinking like a PM. <strong>I built a tool. It shipped. Now I want to do that on purpose.</strong></p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="brq.html">See the BRQ project →</a>
+      <a class="btn btn-ghost" href="spotify.html">🎧 Spotify teardown</a>
+      <a class="btn btn-ghost" href="decisions.html">📓 Decision journal</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">BRQ Tool Shipped</span><span class="marquee-item">Team-Wide Adoption</span><span class="marquee-item">50+ Implementations</span><span class="marquee-item">98% On-Time</span><span class="marquee-item">Six Sigma DMAIC</span><span class="marquee-item">Spotify Teardown</span><span class="marquee-item">Decision Journal</span><span class="marquee-item">APM Ready</span><span class="marquee-item">Dallas TX</span><span class="marquee-item">Remote OK</span>
+    <span class="marquee-item">BRQ Tool Shipped</span><span class="marquee-item">Team-Wide Adoption</span><span class="marquee-item">50+ Implementations</span><span class="marquee-item">98% On-Time</span><span class="marquee-item">Six Sigma DMAIC</span><span class="marquee-item">Spotify Teardown</span><span class="marquee-item">Decision Journal</span><span class="marquee-item">APM Ready</span><span class="marquee-item">Dallas TX</span><span class="marquee-item">Remote OK</span>
+  </div>
+</div>
+
+<div class="about-strip">
+  <div class="about-strip-inner">
+    <p>I'm not pretending to have years of PM titles. What I have is <strong>three years sitting exactly where products meet reality</strong> — where client requirements collide with technical constraints, where a feature that looked simple in a spec turns out to break someone's workflow. That's the perspective I'm bringing to product.</p>
+  </div>
+</div>
+
+<section class="rooms-section">
+  <div class="rooms-inner">
+    <div class="section-label reveal">The product lab</div>
+    <h2 class="section-title reveal reveal-d1">Four rooms.<br>One product mindset.</h2>
+    <div class="rooms-grid">
+      <a class="room-card reveal" href="brq.html">
+        <div class="room-num">Room 01</div>
+        <div class="room-icon">🛠️</div>
+        <div class="room-title">The BRQ Project</div>
+        <div class="room-desc">Try a working prototype of the AI-assisted intake wizard I built and shipped at Nelnet. See the product decisions behind every design choice.</div>
+        <div class="room-cta">Open room →</div>
+      </a>
+      <a class="room-card reveal reveal-d1" href="spotify.html">
+        <div class="room-num">Room 02</div>
+        <div class="room-icon">🎧</div>
+        <div class="room-title">Spotify Teardown</div>
+        <div class="room-desc">A visual product teardown focused on search intent, discovery trust, and the difference between personalization and confusion. With prioritization.</div>
+        <div class="room-cta">Open room →</div>
+      </a>
+      <a class="room-card reveal reveal-d2" href="decisions.html">
+        <div class="room-num">Room 03</div>
+        <div class="room-icon">📓</div>
+        <div class="room-title">Decision Journal</div>
+        <div class="room-desc">Recruiters usually see outcomes. This room shows the thinking underneath: options, tradeoffs, real decisions, and what I'd revisit.</div>
+        <div class="room-cta">Open room →</div>
+      </a>
+      <a class="room-card reveal reveal-d3" href="about.html">
+        <div class="room-num">Room 04</div>
+        <div class="room-icon">👤</div>
+        <div class="room-title">About Jonathan</div>
+        <div class="room-desc">The timeline from Air Force to implementation PM to product builder. Why this transition makes sense and what I bring that most APM candidates don't.</div>
+        <div class="room-cta">Open room →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="metrics-section">
+  <div class="metrics-inner">
+    <div class="metric-cell"><div class="metric-val">50+</div><div class="metric-key">Implementations delivered</div></div>
+    <div class="metric-cell"><div class="metric-val">98%</div><div class="metric-key">On-time delivery rate</div></div>
+    <div class="metric-cell"><div class="metric-val">1</div><div class="metric-key">Tool built and shipped</div></div>
+    <div class="metric-cell"><div class="metric-val">APM</div><div class="metric-key">Target role</div></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>Jonathan West · Product Lab · Dallas, TX</span>
+  <div class="footer-links">
+    <a href="brq.html">BRQ Project</a>
+    <a href="spotify.html">Teardown</a>
+    <a href="decisions.html">Decisions</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <span>© 2026</span>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Journal | Jonathan West</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='22' font-size='14' fill='white' font-family='monospace' font-weight='bold' x='7'>JW</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;--muted:#64748B;--rule:#E2E8F0;--blue:#2563EB;--blue-2:#1D4ED8;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);--green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink)}
+.nav-mark{width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--ink);background:var(--off)}
+.nav-links a.active{color:var(--blue);background:var(--blue-bg)}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none}
+.nav-cta:hover{background:var(--blue-2)}
+
+.page-hero{padding:64px 40px 48px;background:var(--sky);border-bottom:1px solid var(--rule)}
+.page-hero-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+.page-title{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:16px}
+.page-sub{font-size:17px;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:28px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:20px}
+.tag-blue{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
+
+.content{max-width:900px;margin:0 auto;padding:64px 40px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.section-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:36px}
+
+/* DECISION CARDS */
+.decisions{display:flex;flex-direction:column;gap:20px}
+.decision{background:var(--white);border:1.5px solid var(--rule);border-radius:16px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.decision:hover{border-color:var(--blue-border);box-shadow:0 8px 24px rgba(37,99,235,.07)}
+.decision-header{padding:24px 28px;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.decision-question{font-size:16px;font-weight:700;color:var(--ink);line-height:1.4}
+.decision-source{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.06em;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.src-brq{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
+.src-spotify{background:#F0FDF4;border:1px solid rgba(29,185,84,.2);color:#16A34A}
+.src-pm{background:var(--amber-bg);border:1px solid rgba(217,119,6,.2);color:var(--amber)}
+.decision-chevron{font-size:16px;color:var(--muted);transition:transform .25s;flex-shrink:0;margin-top:2px}
+.decision.open .decision-chevron{transform:rotate(180deg)}
+.decision-body{display:none;padding:0 28px 28px}
+.decision.open .decision-body{display:block;animation:fadeup .25s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.decision-context{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;padding:16px;background:var(--off);border-radius:10px;border-left:3px solid var(--muted-2)}
+.decision-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.dg-cell{border-radius:10px;padding:16px}
+.dg-cell.options{background:var(--off);border:1px solid var(--rule)}
+.dg-cell.decision{background:var(--blue-bg);border:1px solid var(--blue-border)}
+.dg-cell.revisit{background:var(--amber-bg);border:1px solid rgba(217,119,6,.15)}
+.dg-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.dg-cell.options .dg-label{color:var(--muted)}
+.dg-cell.decision .dg-label{color:var(--blue)}
+.dg-cell.revisit .dg-label{color:var(--amber)}
+.dg-text{font-size:13px;line-height:1.65}
+.dg-cell.options .dg-text{color:var(--ink-2)}
+.dg-cell.decision .dg-text{color:var(--ink);font-weight:600}
+.dg-cell.revisit .dg-text{color:var(--ink-2)}
+.decision-principle{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);padding:12px 16px;background:var(--blue-bg);border-radius:8px;line-height:1.5}
+
+/* THINKING SECTION */
+.thinking-card{background:var(--sky);border:1px solid var(--blue-border);border-radius:16px;padding:36px;margin-top:48px}
+.thinking-title{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:16px}
+.thinking-text{font-size:15px;color:var(--ink-2);line-height:1.8}
+
+.footer{border-top:1px solid var(--rule);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--blue)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}
+@media(max-width:768px){.nav{padding:0 20px}.nav-links{display:none}.page-hero,.content{padding-left:20px;padding-right:20px}.decision-grid{grid-template-columns:1fr}.decision-header{flex-direction:column;gap:10px}.footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html"><div class="nav-mark">JW</div>Jonathan West</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="brq.html">BRQ Project</a></li>
+    <li><a href="spotify.html">Teardown</a></li>
+    <li><a href="decisions.html" class="active">Decisions</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">Get in touch</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Room 03</div>
+    <h1 class="page-title">Decision Journal</h1>
+    <p class="page-sub">Recruiters usually see outcomes. This room shows the thinking underneath: the options, the tradeoffs, the actual decision, and what I'd revisit.</p>
+    <div class="tags"><span class="tag tag-blue">Product Judgment</span><span class="tag tag-blue">Tradeoffs</span><span class="tag tag-blue">Real Decisions</span></div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="section-label reveal">Room 03 / Decision Journal</div>
+  <h2 class="reveal reveal-d1">Small decisions that reveal<br>how I think.</h2>
+
+  <div class="decisions">
+
+    <div class="decision reveal">
+      <div class="decision-header" onclick="toggle(this)">
+        <div class="decision-question">Should the BRQ wizard autosave progress between sessions?</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <span class="decision-source src-brq">BRQ Project</span>
+          <span class="decision-chevron">▾</span>
+        </div>
+      </div>
+      <div class="decision-body">
+        <div class="decision-context">Clients sometimes start the intake and get pulled away before finishing. We were losing partially-completed forms with no recovery path.</div>
+        <div class="decision-grid">
+          <div class="dg-cell options"><div class="dg-label">Options considered</div><div class="dg-text">Add browser localStorage autosave. Build server-side session persistence. Ship a shorter flow that can be completed in one sitting. Do nothing.</div></div>
+          <div class="dg-cell decision"><div class="dg-label">Decision</div><div class="dg-text">Defer autosave. Design the flow to complete in under 8 minutes and remove optional fields that cause hesitation. Ship first, add draft recovery if analytics show meaningful abandonment.</div></div>
+          <div class="dg-cell revisit"><div class="dg-label">What I'd revisit</div><div class="dg-text">If usage data showed 20%+ abandonment mid-flow, autosave becomes the priority fix. Without that data, it's premature complexity.</div></div>
+        </div>
+        <div class="decision-principle">Principle: Complexity earns its place. Ship the simpler version first and let data justify the harder build.</div>
+      </div>
+    </div>
+
+    <div class="decision reveal reveal-d1">
+      <div class="decision-header" onclick="toggle(this)">
+        <div class="decision-question">Should clients see technical ERP and integration fields upfront?</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <span class="decision-source src-brq">BRQ Project</span>
+          <span class="decision-chevron">▾</span>
+        </div>
+      </div>
+      <div class="decision-body">
+        <div class="decision-context">The original BRQ asked technical AR code and ERP questions early, before the client had context for why we needed them. IT stakeholders answered incorrectly; non-technical stakeholders skipped entirely.</div>
+        <div class="decision-grid">
+          <div class="dg-cell options"><div class="dg-label">Options considered</div><div class="dg-text">Show all fields to all clients. Hide technical fields entirely and let PMs fill them separately. Reveal technical fields conditionally based on institution type.</div></div>
+          <div class="dg-cell decision"><div class="dg-label">Decision</div><div class="dg-text">Conditional reveal. Community colleges and small private institutions see a simplified flow. Multi-campus systems and large universities see the full technical section. Institution type drives the branching logic.</div></div>
+          <div class="dg-cell revisit"><div class="dg-label">What I'd revisit</div><div class="dg-text">The branching adds maintenance complexity. Worth monitoring whether the split actually reduces follow-up questions or just shifts where they happen.</div></div>
+        </div>
+        <div class="decision-principle">Principle: The client should not feel punished for not knowing implementation language. That's our job to translate.</div>
+      </div>
+    </div>
+
+    <div class="decision reveal">
+      <div class="decision-header" onclick="toggle(this)">
+        <div class="decision-question">Should Spotify add a pinned home layout option for power users?</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <span class="decision-source src-spotify">Spotify</span>
+          <span class="decision-chevron">▾</span>
+        </div>
+      </div>
+      <div class="decision-body">
+        <div class="decision-context">Power users frequently complain that the Spotify home screen rearranges itself, making it harder to navigate to the same content reliably. The algorithmic home is optimized for discovery, not navigation.</div>
+        <div class="decision-grid">
+          <div class="dg-cell options"><div class="dg-label">Options considered</div><div class="dg-text">Full user-controlled home layout. A pinned "favorites" row at the top that stays stable. A toggle between "discovery mode" and "navigation mode." Do nothing.</div></div>
+          <div class="dg-cell decision"><div class="dg-label">Decision</div><div class="dg-text">Test demand first with a pinned row — not a full layout editor. A single pinned section adds predictability for power users without committing to preference management infrastructure for a feature with uncertain adoption.</div></div>
+          <div class="dg-cell revisit"><div class="dg-label">What I'd revisit</div><div class="dg-text">If adoption is high and users are actively managing the pinned section, invest in a fuller layout customization system. If adoption is low, deprioritize and focus on search intent fixes instead.</div></div>
+        </div>
+        <div class="decision-principle">Principle: Validate demand with the smallest version of the feature before building the infrastructure to support it.</div>
+      </div>
+    </div>
+
+    <div class="decision reveal reveal-d1">
+      <div class="decision-header" onclick="toggle(this)">
+        <div class="decision-question">Should AI-powered recommendations show reasoning to users?</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <span class="decision-source src-pm">Product Thinking</span>
+          <span class="decision-chevron">▾</span>
+        </div>
+      </div>
+      <div class="decision-body">
+        <div class="decision-context">Across both Spotify (why is this in my Discover Weekly?) and the BRQ tool (why is this field appearing now?), users encounter AI or algorithmic decisions without explanation. The question is whether transparency helps or hurts the product experience.</div>
+        <div class="decision-grid">
+          <div class="dg-cell options"><div class="dg-label">Options considered</div><div class="dg-text">No explanation — keep the interface clean. Full explanation — show the reasoning algorithm. Light explainability — a brief tag or label. User-controlled — let users toggle explanation on/off.</div></div>
+          <div class="dg-cell decision"><div class="dg-label">Decision</div><div class="dg-text">Light explainability by default. A brief "because you listened to X" or "this field appears for multi-campus systems" gives enough context to build trust without overwhelming the interface. Users who want more can ask.</div></div>
+          <div class="dg-cell revisit"><div class="dg-label">What I'd revisit</div><div class="dg-text">If users are actively ignoring the explainability labels, reconsider whether the cognitive cost is worth the trust benefit. Run a test.</div></div>
+        </div>
+        <div class="decision-principle">Principle: Trust depends on evidence. A recommendation without explanation increases speed but decreases confidence. The tradeoff is worth making explicit.</div>
+      </div>
+    </div>
+
+    <div class="decision reveal">
+      <div class="decision-header" onclick="toggle(this)">
+        <div class="decision-question">When a PM inherits a stalled implementation, what should they prioritize first?</div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <span class="decision-source src-pm">PM Judgment</span>
+          <span class="decision-chevron">▾</span>
+        </div>
+      </div>
+      <div class="decision-body">
+        <div class="decision-context">I inherited a stalled higher education implementation mid-project with unresolved ERP issues, a frustrated client, and unclear internal ownership. The immediate instinct was to fix the technical problem. That was the wrong instinct.</div>
+        <div class="decision-grid">
+          <div class="dg-cell options"><div class="dg-label">Options considered</div><div class="dg-text">Fix the technical ERP issue immediately. Clarify internal ownership first. Rebuild the client relationship first. Do a full audit before doing anything.</div></div>
+          <div class="dg-cell decision"><div class="dg-label">Decision</div><div class="dg-text">Audit first, client relationship second, technical fix third. The ERP issue was blocking delivery, but a frustrated client won't trust any fix until they believe someone is actually in charge. Establishing that trust bought us the time to solve the technical problem correctly.</div></div>
+          <div class="dg-cell revisit"><div class="dg-label">What I'd revisit</div><div class="dg-text">If the technical issue had been causing active client data problems, I'd have reordered — fix the harm first, then rebuild the relationship. Context matters more than any rule.</div></div>
+        </div>
+        <div class="decision-principle">Principle: When a project is stalled, the blocker is almost never just technical. Fix the trust first.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="thinking-card reveal" style="margin-top:48px">
+    <div class="thinking-title">How I approach decisions</div>
+    <div class="thinking-text">Every decision in this journal follows the same structure: what options did I actually consider (not just the one I chose), what did I decide and why, and what would change my mind. The third column is the most important one. A decision without a "what would make me revisit this" is just a guess with extra confidence.</div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span>Jonathan West · Product Lab · Dallas, TX</span>
+  <div class="footer-links"><a href="about.html">Next: About →</a><a href="spotify.html">← Teardown</a><a href="contact.html">Contact</a></div>
+  <span>© 2026</span>
+</footer>
+
+<script>
+function toggle(header) {
+  const card = header.closest('.decision');
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.decision').forEach(d => d.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+const ro = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

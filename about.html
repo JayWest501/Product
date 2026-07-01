@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Jonathan West</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='22' font-size='14' fill='white' font-family='monospace' font-weight='bold' x='7'>JW</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{--white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;--muted:#64748B;--rule:#E2E8F0;--blue:#2563EB;--blue-2:#1D4ED8;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);--green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink)}
+.nav-mark{width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s}
+.nav-links a:hover{color:var(--ink);background:var(--off)}
+.nav-links a.active{color:var(--blue);background:var(--blue-bg)}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none}
+.nav-cta:hover{background:var(--blue-2)}
+
+.page-hero{padding:64px 40px 48px;background:var(--sky);border-bottom:1px solid var(--rule)}
+.page-hero-inner{max-width:1100px;margin:0 auto}
+.breadcrumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.breadcrumb a{color:var(--blue);text-decoration:none}
+.page-title{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:16px}
+.page-sub{font-size:17px;color:var(--muted);max-width:580px;line-height:1.7}
+
+.content{max-width:1100px;margin:0 auto;padding:64px 40px}
+.two-col{display:grid;grid-template-columns:1.2fr 0.8fr;gap:64px;align-items:start;margin-bottom:64px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.section-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:24px}
+.body-text{font-size:16px;color:var(--ink-2);line-height:1.85}
+.body-text p+p{margin-top:16px}
+.body-text strong{color:var(--ink);font-weight:700}
+
+/* PULL QUOTE */
+.pull{font-size:20px;font-weight:700;color:var(--ink);line-height:1.45;border-left:4px solid var(--blue);padding-left:20px;margin-bottom:24px;font-style:italic}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--blue),var(--rule) 90%)}
+.tl-item{position:relative;margin-bottom:36px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-28px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--white);border:2px solid var(--rule);transition:border-color .2s,background .2s}
+.tl-item.current .tl-dot{background:var(--blue);border-color:var(--blue)}
+.tl-item:hover .tl-dot{border-color:var(--blue)}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.tl-role{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:1px}
+.tl-org{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:8px}
+.tl-text{font-size:13px;color:var(--muted);line-height:1.65}
+.tl-road{display:flex;align-items:center;gap:12px;padding-top:24px;border-top:1px dashed var(--rule);margin-top:32px}
+.tl-road-dot{width:14px;height:14px;border-radius:50%;border:2px dashed var(--muted-2)}
+.tl-road-text{font-size:14px;font-style:italic;color:var(--muted)}
+
+/* FACTS */
+.facts{background:var(--white);border:1.5px solid var(--rule);border-radius:16px;overflow:hidden}
+.fact{padding:16px 20px;border-bottom:1px solid var(--rule)}
+.fact:last-child{border-bottom:none}
+.fact-l{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.fact-v{font-size:13px;font-weight:600;color:var(--ink)}
+
+/* WHAT I BRING */
+.bring-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.bring-card{background:var(--off);border:1.5px solid var(--rule);border-radius:14px;padding:24px;transition:border-color .2s,transform .2s}
+.bring-card:hover{border-color:var(--blue-border);transform:translateY(-2px)}
+.bring-icon{font-size:24px;margin-bottom:12px}
+.bring-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.bring-text{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* CTA */
+.cta-wrap{background:var(--sky);border:1px solid var(--blue-border);border-radius:20px;padding:48px;text-align:center;margin-top:48px}
+.cta-title{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-bottom:12px}
+.cta-sub{font-size:16px;color:var(--muted);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:background .15s,transform .15s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-2);transform:translateY(-1px)}
+.btn-ghost{background:var(--white);color:var(--ink);border:1.5px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.footer{border-top:1px solid var(--rule);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--blue)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}
+@media(max-width:768px){.nav{padding:0 20px}.nav-links{display:none}.page-hero,.content{padding-left:20px;padding-right:20px}.two-col{grid-template-columns:1fr;gap:40px}.bring-grid{grid-template-columns:1fr}.btn-row{flex-direction:column;align-items:center}.footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html"><div class="nav-mark">JW</div>Jonathan West</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="brq.html">BRQ Project</a></li>
+    <li><a href="spotify.html">Teardown</a></li>
+    <li><a href="decisions.html">Decisions</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">Get in touch</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Room 04</div>
+    <h1 class="page-title">About Jonathan</h1>
+    <p class="page-sub">The timeline from Air Force to Implementation PM to product builder. Why this transition makes sense and what I bring that most APM candidates don't.</p>
+  </div>
+</div>
+
+<div class="content">
+  <div class="two-col">
+    <div class="reveal">
+      <div class="section-label">The story</div>
+      <p class="pull">Leaving the Air Force was harder than I expected. Not the work part — the people part.</p>
+      <div class="body-text">
+        <p>Seven years in Security Forces meant being surrounded by people from every background imaginable — and learning how to work with all of them under pressure. When that ended, the transition to corporate life was quieter than I was ready for. More isolated. I knew how to execute, but I didn't yet know where I fit.</p>
+        <p>Implementation PM work changed that. It gave me back what I missed most — real problems, real people, and the kind of collaboration where your ability to read a room and build trust actually determines the outcome. Every client is different. Every implementation has a moment where the plan meets reality and you have to think fast.</p>
+        <p>Three years of that work put me in a specific seat: the person who sees what the product promised and what the client actually got. I watched well-intentioned features create months of cleanup. I watched small, well-scoped fixes save teams weeks of work, every week. That's the perspective I'm bringing to product — <strong>I've seen what happens after the feature ships.</strong></p>
+        <p>Outside of work I'm in the middle of my first running journey — several 5Ks and 10Ks in, with a half marathon on the calendar before the year is out. The goal keeps moving forward. That feels right.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-d1">
+      <div class="facts">
+        <div class="fact"><div class="fact-l">Status</div><div class="fact-v">Open to Associate PM roles</div></div>
+        <div class="fact"><div class="fact-l">Currently</div><div class="fact-v">Implementation PM, Nelnet Campus Commerce</div></div>
+        <div class="fact"><div class="fact-l">Education</div><div class="fact-v">MBA (Marketing) — SNHU</div></div>
+        <div class="fact"><div class="fact-l">Certifications</div><div class="fact-v">PMP approved — PMI · HubSpot · Google PM</div></div>
+        <div class="fact"><div class="fact-l">Location</div><div class="fact-v">Dallas, TX — open to remote</div></div>
+        <div class="fact"><div class="fact-l">Domain</div><div class="fact-v">Enterprise SaaS, higher ed, ERP integration</div></div>
+        <div class="fact"><div class="fact-l">Phone</div><div class="fact-v">(501) 613-6997</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-label reveal">The journey</div>
+  <h2 class="reveal reveal-d1" style="margin-bottom:36px">How I got here.</h2>
+  <div class="timeline reveal reveal-d2">
+    <div class="tl-item current">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Oct 2024 – Present</div>
+      <div class="tl-role">Implementation Project Manager</div>
+      <div class="tl-org">Nelnet Campus Commerce · Dallas, TX</div>
+      <div class="tl-text">The closest seat to "what the client actually needed" on every implementation. Own projects end to end across 8 to 13 concurrent accounts. Built an AI-assisted intake tool from a problem I noticed — adopted by leadership for team-wide rollout.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Jul 2024 – Oct 2024</div>
+      <div class="tl-role">Associate Project Manager</div>
+      <div class="tl-org">SpectrumVoIP · Plano, TX</div>
+      <div class="tl-text">Led VoIP platform implementations end to end. Learned how a product decision upstream becomes a delivery problem downstream. Transitioned to a larger enterprise opportunity at Nelnet.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Feb 2022 – Dec 2023</div>
+      <div class="tl-role">Junior Business Analyst</div>
+      <div class="tl-org">Metasource · Denver, CO</div>
+      <div class="tl-text">Gathered requirements directly from clients. The first place I learned that what people ask for and what they actually need are often different things.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Apr 2014 – Nov 2021</div>
+      <div class="tl-role">Security Forces Supervisor</div>
+      <div class="tl-org">United States Air Force · Aurora, CO</div>
+      <div class="tl-text">Seven years leading teams in high-accountability operational environments. Built the instinct for clarity, calm communication, and accountability that shapes how I work today.</div>
+    </div>
+    <div class="tl-road">
+      <div class="tl-road-dot"></div>
+      <div class="tl-road-text">Next stop — Associate PM role, destination TBD</div>
+    </div>
+  </div>
+
+  <!-- WHAT I BRING -->
+  <div class="section-label reveal" style="margin-top:64px">What I bring</div>
+  <h2 class="reveal reveal-d1" style="margin-bottom:32px">Why this transition makes sense.</h2>
+  <div class="bring-grid reveal reveal-d2">
+    <div class="bring-card"><div class="bring-icon">👁️</div><div class="bring-title">Downstream awareness</div><div class="bring-text">I know what a feature costs after launch: support tickets, client confusion, rework. Most new PMs learn this after their first painful launch. I've already learned it.</div></div>
+    <div class="bring-card"><div class="bring-icon">🛠️</div><div class="bring-title">Builder's instinct</div><div class="bring-text">I didn't wait for a roadmap slot to fix the broken intake process. I scoped the smallest version of a solution that would work and shipped it. That's the instinct I want to keep using.</div></div>
+    <div class="bring-card"><div class="bring-icon">🤝</div><div class="bring-title">Cross-functional fluency</div><div class="bring-text">Engineering, client stakeholders, executive sponsors — I've translated between all three on every project I've run. That's the job of a PM.</div></div>
+    <div class="bring-card"><div class="bring-icon">⚖️</div><div class="bring-title">Tradeoff thinking</div><div class="bring-text">Every implementation is a series of scope decisions under time pressure. I'm comfortable saying what we're not building and why. Saying no is part of the job.</div></div>
+    <div class="bring-card"><div class="bring-icon">📊</div><div class="bring-title">Outcome orientation</div><div class="bring-text">I think in terms of what changed because of a decision, not just whether the task was completed. The metric that matters is the one that reflects the user's experience.</div></div>
+    <div class="bring-card"><div class="bring-icon">🧭</div><div class="bring-title">Domain depth</div><div class="bring-text">Enterprise SaaS, higher education, ERP integration. I understand the client world my products will serve better than most candidates who haven't lived in it.</div></div>
+  </div>
+
+  <div class="cta-wrap reveal" style="margin-top:48px">
+    <div class="cta-title">Ready to see the work?</div>
+    <div class="cta-sub">The portfolio is built like a product because that's how I think. Explore the rooms or get in touch directly.</div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="brq.html">Start with the BRQ project →</a>
+      <a class="btn btn-ghost" href="contact.html">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span>Jonathan West · Product Lab · Dallas, TX</span>
+  <div class="footer-links"><a href="contact.html">Contact →</a><a href="decisions.html">← Decisions</a><a href="index.html">Home</a></div>
+  <span>© 2026</span>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
