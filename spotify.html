@@ -7,10 +7,19 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><text y='22' font-size='14' fill='white' font-family='monospace' font-weight='bold' x='7'>JW</text></svg>">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
-:root{--white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;--muted:#64748B;--rule:#E2E8F0;--blue:#2563EB;--blue-2:#1D4ED8;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);--green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB;--spotify:#1DB954}
+:root{
+  --white:#FFFFFF;--off:#F8FAFC;--sky:#EFF6FF;--ink:#0F1729;--ink-2:#1E293B;
+  --muted:#64748B;--muted-2:#94A3B8;--rule:#E2E8F0;
+  --blue:#2563EB;--blue-2:#1D4ED8;--blue-bg:rgba(37,99,235,0.06);--blue-border:rgba(37,99,235,0.2);
+  --green:#16A34A;--green-bg:#F0FDF4;--amber:#D97706;--amber-bg:#FFFBEB;
+  --spotify:#1DB954;--spotify-dark:#158a3e;--spotify-bg:rgba(29,185,84,0.08);--spotify-border:rgba(29,185,84,0.2);
+  --sp-black:#121212;--sp-dark:#181818;--sp-card:#282828;--sp-hover:#333333;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
 .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:15px;color:var(--ink)}
 .nav-mark{width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
@@ -18,104 +27,229 @@ body{background:var(--white);color:var(--ink);font-family:'Plus Jakarta Sans',sa
 .nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:7px;transition:color .15s,background .15s}
 .nav-links a:hover{color:var(--ink);background:var(--off)}
 .nav-links a.active{color:var(--blue);background:var(--blue-bg)}
-.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none}
+.nav-cta{font-size:13px;font-weight:700;color:#fff;background:var(--blue);padding:9px 18px;border-radius:8px;text-decoration:none;transition:background .15s}
 .nav-cta:hover{background:var(--blue-2)}
 
-.page-hero{padding:64px 40px 48px;background:var(--sky);border-bottom:1px solid var(--rule)}
-.page-hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
-.breadcrumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.breadcrumb a{color:var(--blue);text-decoration:none}
-.page-title{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:16px}
-.page-sub{font-size:17px;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:28px}
-.tags{display:flex;gap:8px;flex-wrap:wrap}
+/* HERO — SPOTIFY BRANDED */
+.page-hero{
+  padding:64px 40px 0;
+  background:linear-gradient(180deg,var(--sp-black) 0%,#1a2a1a 60%,var(--white) 100%);
+  border-bottom:1px solid var(--rule);
+  position:relative;overflow:hidden;
+}
+.hero-noise{
+  position:absolute;inset:0;opacity:.03;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;padding-bottom:48px}
+.breadcrumb{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.breadcrumb a{color:var(--spotify);text-decoration:none}
+.hero-brand{display:flex;align-items:center;gap:20px;margin-bottom:32px}
+.spotify-logo-wrap{width:72px;height:72px;filter:drop-shadow(0 4px 16px rgba(29,185,84,.4))}
+.hero-brand-text{}
+.hero-brand-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.hero-brand-name{font-size:32px;font-weight:900;color:#fff;letter-spacing:-.02em}
+.hero-headline{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:#fff;margin-bottom:16px}
+.hero-headline .green{color:var(--spotify)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.6);max-width:580px;line-height:1.7;margin-bottom:32px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap}
 .tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.04em;padding:5px 12px;border-radius:20px}
-.tag-blue{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)}
-.spotify-logo{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,#1DB954,#1ED760);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
+.tag-spotify{background:var(--spotify-bg);border:1px solid var(--spotify-border);color:var(--spotify)}
+.tag-white{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
 
-.content{max-width:1100px;margin:0 auto;padding:64px 40px}
-.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.section-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
-h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:28px}
-
-/* TABS */
-.tab-wrap{background:var(--white);border:1.5px solid var(--rule);border-radius:20px;overflow:hidden;margin-bottom:48px}
-.tab-bar{display:flex;border-bottom:1px solid var(--rule);background:var(--off)}
-.tab-btn{padding:14px 22px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+/* TAB INTERFACE */
+.tab-section{background:var(--white)}
+.tab-bar-wrap{position:sticky;top:60px;z-index:90;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.tab-bar{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{
+  padding:16px 22px;font-size:13px;font-weight:600;color:var(--muted);
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;white-space:nowrap;
+  display:flex;align-items:center;gap:8px;
+}
 .tab-btn:hover{color:var(--ink)}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
-.tab-panel{display:none;padding:36px;animation:fade .3s ease}
+.tab-btn.active{color:var(--spotify);border-bottom-color:var(--spotify)}
+.tab-btn .tab-icon{font-size:14px}
+.tab-panels{max-width:1100px;margin:0 auto;padding:48px 40px}
+.tab-panel{display:none;animation:fadeup .3s ease}
 .tab-panel.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* WORKS WELL */
-.works-grid{display:flex;flex-direction:column;gap:14px}
-.works-item{display:flex;gap:16px;background:var(--off);border:1px solid var(--rule);border-radius:12px;padding:20px;transition:border-color .2s}
-.works-item:hover{border-color:var(--blue-border)}
-.works-badge{width:36px;height:36px;border-radius:10px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.works-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
-.works-text{font-size:13px;color:var(--muted);line-height:1.65}
+.works-grid{display:flex;flex-direction:column;gap:16px}
+.works-item{
+  display:flex;gap:20px;background:var(--off);border:1.5px solid var(--rule);
+  border-radius:14px;padding:24px;
+  border-left:4px solid var(--spotify);
+  transition:border-color .2s,box-shadow .2s;
+}
+.works-item:hover{box-shadow:0 4px 16px rgba(29,185,84,.1)}
+.works-badge{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--spotify-bg);border:1px solid var(--spotify-border);
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
+}
+.works-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.works-text{font-size:14px;color:var(--muted);line-height:1.7}
+.works-verdict{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--spotify);margin-top:8px;
+}
 
 /* PROBLEM */
-.prob-steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden}
-.prob-step{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:24px;border-bottom:1px solid var(--rule);transition:background .15s}
-.prob-step:last-child{border-bottom:none}
-.prob-step:hover{background:var(--sky)}
-.prob-num{width:32px;height:32px;border-radius:9px;background:var(--amber-bg);border:1px solid rgba(217,119,6,.2);color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.prob-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.prob-intro{font-size:15px;color:var(--ink-2);line-height:1.8;margin-bottom:32px;max-width:700px}
+.prob-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.prob-card{
+  background:var(--white);border:1.5px solid var(--rule);border-radius:14px;padding:24px;
+  border-top:3px solid var(--amber);
+}
+.prob-num{
+  width:28px;height:28px;border-radius:8px;background:var(--amber-bg);
+  color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+.prob-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
 .prob-text{font-size:13px;color:var(--muted);line-height:1.65}
+.prob-deepdive{
+  background:var(--off);border:1px solid var(--rule);border-radius:14px;padding:28px;
+  border-left:4px solid var(--amber);
+}
+.pd-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.pd-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.pd-text{font-size:14px;color:var(--ink-2);line-height:1.8}
+.pd-text p+p{margin-top:12px}
 
-/* FIX */
+/* BEFORE / AFTER — REAL SPOTIFY UI */
+.ba-intro{font-size:15px;color:var(--ink-2);line-height:1.8;margin-bottom:32px;max-width:700px}
+.ba-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.ba-panel{border-radius:16px;overflow:hidden;border:1.5px solid var(--rule)}
+.ba-label-bar{padding:12px 18px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.ba-before .ba-label-bar{background:var(--amber-bg);color:var(--amber);border-bottom:1px solid rgba(217,119,6,.15)}
+.ba-after .ba-label-bar{background:var(--spotify-bg);color:var(--spotify);border-bottom:1px solid var(--spotify-border)}
+
+/* SPOTIFY UI MOCK */
+.sp-ui{background:var(--sp-black);padding:0;min-height:320px}
+.sp-topbar{
+  background:var(--sp-dark);padding:14px 16px;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.sp-search-box{
+  flex:1;background:rgba(255,255,255,.1);border-radius:20px;
+  padding:9px 14px 9px 36px;font-size:13px;color:rgba(255,255,255,.9);
+  position:relative;display:flex;align-items:center;
+}
+.sp-search-icon{position:absolute;left:12px;opacity:.6;font-size:14px}
+.sp-search-text{font-size:13px;color:rgba(255,255,255,.8)}
+.sp-content{padding:16px}
+.sp-result-section{margin-bottom:16px}
+.sp-section-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.sp-result{
+  display:flex;align-items:center;gap:12px;padding:8px 10px;
+  border-radius:6px;transition:background .15s;margin-bottom:4px;
+}
+.sp-result:hover{background:var(--sp-hover)}
+.sp-result-art{
+  width:40px;height:40px;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.sp-result-info{}
+.sp-result-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:1px}
+.sp-result-type{font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace}
+.sp-confused{
+  margin-top:12px;padding:10px 12px;background:rgba(217,119,6,.1);
+  border-radius:8px;border:1px solid rgba(217,119,6,.2);
+  font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;
+  display:flex;align-items:center;gap:6px;
+}
+.sp-filter-row{display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;scrollbar-width:none}
+.sp-filter{
+  padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  white-space:nowrap;cursor:pointer;transition:background .15s;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);
+}
+.sp-filter.active{background:var(--spotify);color:var(--sp-black)}
+.sp-success{
+  padding:10px 12px;background:rgba(29,185,84,.1);
+  border-radius:8px;border:1px solid var(--spotify-border);
+  font-size:11px;color:var(--spotify);font-family:'JetBrains Mono',monospace;
+  margin-top:12px;display:flex;align-items:center;gap:6px;
+}
+
+/* MY FIX */
+.fix-intro{font-size:15px;color:var(--ink-2);line-height:1.8;margin-bottom:32px;max-width:700px}
 .fix-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
-.fix-card{background:var(--off);border:1.5px solid var(--rule);border-radius:14px;padding:22px;border-top:3px solid var(--blue);transition:border-color .2s,transform .2s}
-.fix-card:hover{border-top-color:var(--blue-2);transform:translateY(-2px)}
+.fix-card{
+  background:var(--white);border:1.5px solid var(--rule);border-radius:14px;padding:24px;
+  border-top:3px solid var(--blue);
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.fix-card:hover{border-top-color:var(--spotify);transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,185,84,.1)}
+.fix-icon{font-size:24px;margin-bottom:12px}
 .fix-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
 .fix-text{font-size:13px;color:var(--muted);line-height:1.65}
-.fix-note{font-size:14px;color:var(--muted);line-height:1.75;padding:20px;background:var(--sky);border-radius:10px;border-left:3px solid var(--blue)}
+.fix-note{
+  font-size:14px;color:var(--ink-2);line-height:1.75;padding:24px;
+  background:var(--sky);border-radius:12px;border-left:4px solid var(--blue);
+}
 
-/* PRIORITY TABLE */
-.pri-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
-.pri-table th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--off);padding:12px 16px;text-align:left;border-bottom:1px solid var(--rule)}
-.pri-table td{padding:14px 16px;font-size:14px;color:var(--ink-2);border-bottom:1px solid var(--rule)}
+/* PRIORITIZATION */
+.pri-intro{font-size:15px;color:var(--ink-2);line-height:1.8;margin-bottom:32px;max-width:700px}
+.pri-table{width:100%;border-collapse:collapse;border:1.5px solid var(--rule);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.pri-table th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--off);padding:14px 18px;text-align:left;border-bottom:1px solid var(--rule)}
+.pri-table td{padding:16px 18px;font-size:14px;color:var(--ink-2);border-bottom:1px solid var(--rule);vertical-align:middle}
 .pri-table tr:last-child td{border-bottom:none}
 .pri-table tr:hover td{background:var(--sky)}
-.pill{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:4px 10px;border-radius:6px}
-.pill-h{background:var(--green-bg);color:var(--green)}.pill-m{background:var(--amber-bg);color:var(--amber)}
-.call{font-weight:700;color:var(--ink);font-size:13px}
+.pri-table td:first-child{font-weight:700;color:var(--ink)}
+.pill{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;white-space:nowrap}
+.pill-h{background:var(--green-bg);color:var(--green)}
+.pill-m{background:var(--amber-bg);color:var(--amber)}
+.pill-lo{background:var(--off);color:var(--muted);border:1px solid var(--rule)}
+.call-1{font-weight:800;color:var(--spotify)}
+.call-2{font-weight:700;color:var(--blue)}
+.call-3{font-weight:600;color:var(--muted)}
+.pri-insight{
+  background:var(--sp-black);border-radius:14px;padding:28px;
+  display:flex;gap:16px;align-items:flex-start;
+}
+.pi-icon{font-size:24px;flex-shrink:0}
+.pi-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--spotify);margin-bottom:6px}
+.pi-text{font-size:14px;color:rgba(255,255,255,.7);line-height:1.7}
 
-/* BEFORE/AFTER */
-.ba-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-.ba-card{border-radius:14px;overflow:hidden;border:1.5px solid var(--rule)}
-.ba-label{padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--rule)}
-.ba-before .ba-label{background:var(--amber-bg);color:var(--amber)}
-.ba-after .ba-label{background:var(--green-bg);color:var(--green)}
-.ba-content{padding:20px;background:var(--off)}
-.ba-screen{background:var(--white);border-radius:10px;padding:16px;border:1px solid var(--rule);min-height:140px}
-.ba-search-bar{background:var(--off);border:1px solid var(--rule);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--muted);margin-bottom:12px}
-.ba-results{display:flex;flex-direction:column;gap:8px}
-.ba-result{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;background:var(--off);border:1px solid var(--rule)}
-.ba-result-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.ba-result-name{font-size:12px;font-weight:600;color:var(--ink)}
-.ba-result-type{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.ba-confused{color:var(--amber);font-size:10px;font-weight:600;margin-top:8px;font-family:'JetBrains Mono',monospace}
-.ba-filter-row{display:flex;gap:6px;margin-bottom:12px}
-.ba-filter{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1.5px solid var(--rule);color:var(--muted);cursor:default}
-.ba-filter.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+/* SECTION LABEL */
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-label::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px}
+h2{font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin-bottom:24px}
 
-.insight{background:var(--sky);border:1px solid var(--blue-border);border-radius:14px;padding:28px;border-left:4px solid var(--blue);margin-top:24px}
-.insight-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
-.insight-text{font-size:15px;color:var(--ink-2);line-height:1.7;font-weight:500}
-
+/* FOOTER */
 .footer{border-top:1px solid var(--rule);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
 .footer-links{display:flex;gap:20px}
 .footer-links a{color:var(--muted);text-decoration:none;transition:color .15s}
 .footer-links a:hover{color:var(--blue)}
+
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}
-@media(max-width:768px){.nav{padding:0 20px}.nav-links{display:none}.page-hero{padding:40px 20px}.page-hero-inner{grid-template-columns:1fr}.spotify-logo{display:none}.content{padding:40px 20px}.fix-cards{grid-template-columns:1fr}.ba-wrap{grid-template-columns:1fr}.tab-bar{overflow-x:auto}.footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}}
+
+@media(max-width:768px){
+  .nav{padding:0 20px}.nav-links{display:none}
+  .page-hero{padding:40px 20px 0}
+  .tab-bar{padding:0 20px}
+  .tab-panels{padding:32px 20px}
+  .prob-cards,.fix-cards{grid-template-columns:1fr}
+  .ba-wrap{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:12px;padding:24px 20px;text-align:center}
+}
 </style>
 </head>
 <body>
+
 <nav class="nav">
   <a class="nav-logo" href="index.html"><div class="nav-mark">JW</div>Jonathan West</a>
   <ul class="nav-links">
@@ -128,118 +262,260 @@ h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;line-hei
   <a class="nav-cta" href="contact.html">Get in touch</a>
 </nav>
 
+<!-- HERO -->
 <div class="page-hero">
-  <div class="page-hero-inner">
-    <div>
-      <div class="breadcrumb"><a href="index.html">Home</a> / Room 02</div>
-      <h1 class="page-title">Spotify Teardown</h1>
-      <p class="page-sub">A visual product teardown focused on search intent, discovery trust, and the difference between personalization and confusion.</p>
-      <div class="tags"><span class="tag tag-blue">Unsolicited Teardown</span><span class="tag tag-blue">Product Critique</span><span class="tag tag-blue">Prioritization</span></div>
+  <div class="hero-noise"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Room 02</div>
+    <div class="hero-brand">
+      <div class="spotify-logo-wrap">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjggMTY4Ij4KICA8cGF0aCBmaWxsPSIjMURCOTU0IiBkPSJNODQgMEMzNy42IDAgMCAzNy42IDAgODRzMzcuNiA4NCA4NCA4NCA4NC0zNy42IDg0LTg0UzEzMC40IDAgODQgMHptMzguNiAxMjEuMmMtMS41IDIuNS00LjggMy4zLTcuMyAxLjgtMjAtMTIuMi00NS4yLTE1LTc0LjktOC4yLTIuOS43LTUuNy0xLjEtNi40LTQtLjctMi45IDEuMS01LjcgNC02LjQgMzIuNS03LjQgNjAuNC00LjIgODIuOSA5LjUgMi41IDEuNSAzLjMgNC44IDEuNyA3LjN6bTEwLjMtMjIuOWMtMS45IDMuMS02IDQuMS05LjEgMi4yLTIyLjktMTQuMS01Ny44LTE4LjItODQuOS05LjktMy41IDEuMS03LjItLjktOC4zLTQuNC0xLjEtMy41LjktNy4yIDQuNC04LjMgMzAuOS05LjQgNjkuMy00LjggOTUuNiAxMS4zIDMuMSAxLjkgNC4xIDYgMi4zIDkuMXptLjktMjMuOEMxMDguNCA1Ny41IDYzLjggNTYgMzcuNCA2NC4xYy00LjIgMS4zLTguNi0xLjEtOS44LTUuMy0xLjMtNC4yIDEuMS04LjYgNS4zLTkuOCAzMC4yLTkuMiA4MC41LTcuNCAxMTIuMyAxMS40IDMuOCAyLjIgNSA3LjEgMi43IDEwLjktMi4yIDMuNy03LjEgNS0xMC45IDIuOHoiLz4KPC9zdmc+" width="72" height="72" alt="Spotify">
+      </div>
+      <div class="hero-brand-text">
+        <div class="hero-brand-label">Unsolicited teardown</div>
+        <div class="hero-brand-name">Spotify</div>
+      </div>
     </div>
-    <div class="spotify-logo">🎧</div>
+    <h1 class="hero-headline">The <span class="green">Discovery</span><br>Problem.</h1>
+    <p class="hero-sub">A product teardown focused on search intent ambiguity, algorithmic trust, and three fixes I'd prioritize — with the reasoning behind each call.</p>
+    <div class="hero-tags">
+      <span class="tag tag-spotify">Product Critique</span>
+      <span class="tag tag-white">Search UX</span>
+      <span class="tag tag-white">Personalization</span>
+      <span class="tag tag-white">Prioritization</span>
+    </div>
   </div>
 </div>
 
-<div class="content">
-  <div class="section-label reveal">Room 02 / Product Teardown</div>
-  <h2 class="reveal reveal-d1">How I think about a product<br>I didn't build.</h2>
+<!-- STICKY TABS -->
+<div class="tab-bar-wrap">
+  <div class="tab-bar">
+    <div class="tab-btn active" data-tab="works"><span class="tab-icon">✅</span> What's working</div>
+    <div class="tab-btn" data-tab="problem"><span class="tab-icon">🔍</span> The problem</div>
+    <div class="tab-btn" data-tab="before"><span class="tab-icon">↔️</span> Before / After</div>
+    <div class="tab-btn" data-tab="fix"><span class="tab-icon">💡</span> My fix</div>
+    <div class="tab-btn" data-tab="priority"><span class="tab-icon">📊</span> Prioritization</div>
+  </div>
+</div>
 
-  <div class="tab-wrap reveal reveal-d2">
-    <div class="tab-bar">
-      <div class="tab-btn active" data-tab="works">What's working</div>
-      <div class="tab-btn" data-tab="problem">The problem</div>
-      <div class="tab-btn" data-tab="before">Before / After</div>
-      <div class="tab-btn" data-tab="fix">My fix</div>
-      <div class="tab-btn" data-tab="priority">Prioritization</div>
-    </div>
+<div class="tab-section">
+<div class="tab-panels">
 
-    <!-- WORKS WELL -->
-    <div class="tab-panel active" id="tab-works">
-      <div class="works-grid">
-        <div class="works-item"><div class="works-badge">🎯</div><div><div class="works-title">Daily Mix & Discover Weekly</div><div class="works-text">Genuinely best-in-class personalization. Low effort, high perceived value, and delivered on a predictable schedule users build habits around. This is the benchmark for music app personalization.</div></div></div>
-        <div class="works-item"><div class="works-badge">🗺️</div><div><div class="works-title">Made For You hub</div><div class="works-text">Discovery has a permanent, predictable home instead of being buried in the feed. Users know where to go. Sounds obvious — most apps still don't do this well.</div></div></div>
-        <div class="works-item"><div class="works-badge">📱</div><div><div class="works-title">Cross-device session handoff</div><div class="works-text">Nearly invisible. Close the laptop, open your phone, it's still playing. A real engineering and product win that users have never consciously noticed — which is exactly the mark of excellent UX.</div></div></div>
-      </div>
-    </div>
-
-    <!-- PROBLEM -->
-    <div class="tab-panel" id="tab-problem">
-      <div class="prob-steps">
-        <div class="prob-step"><div><div class="prob-num">01</div></div><div><div class="prob-title">Search intent is ambiguous</div><div class="prob-text">When a user searches "true crime," they could mean a podcast, an audiobook, or a playlist. Spotify guesses, mixing all three into one results feed. That guess is wrong often enough that users develop workarounds — typing more specific queries to force a result type. That's the user doing work the product should be doing.</div></div></div>
-        <div class="prob-step"><div><div class="prob-num">02</div></div><div><div class="prob-title">The home screen is unstable</div><div class="prob-text">The layout reshuffles constantly based on algorithm changes. Users lose the ability to build a mental map of where things live. A home screen's job is to be predictably navigable. When it moves too often it stops being navigation and starts being discovery — whether the user wanted discovery or not.</div></div></div>
-        <div class="prob-step"><div><div class="prob-num">03</div></div><div><div class="prob-title">Algorithmic playlists lack explainability</div><div class="prob-text">When Discover Weekly surfaces a track, there's no signal about why. Users who love the pick have no way to signal "more like this" beyond a save. Users who want to understand the pattern can't. This limits trust and discovery confidence over time.</div></div></div>
-      </div>
-    </div>
-
-    <!-- BEFORE/AFTER -->
-    <div class="tab-panel" id="tab-before">
-      <div class="ba-wrap">
-        <div class="ba-card ba-before">
-          <div class="ba-label">Before: Search intent is guessed</div>
-          <div class="ba-content">
-            <div class="ba-screen">
-              <div class="ba-search-bar">true crime</div>
-              <div class="ba-results">
-                <div class="ba-result"><div class="ba-result-icon" style="background:#1DB954">🎵</div><div><div class="ba-result-name">True Crime Playlist</div><div class="ba-result-type">Playlist</div></div></div>
-                <div class="ba-result"><div class="ba-result-icon" style="background:#8B5CF6">🎙️</div><div><div class="ba-result-name">Crime Junkie</div><div class="ba-result-type">Podcast</div></div></div>
-                <div class="ba-result"><div class="ba-result-icon" style="background:#F59E0B">📖</div><div><div class="ba-result-name">True Crime Stories</div><div class="ba-result-type">Audiobook</div></div></div>
-              </div>
-              <div class="ba-confused">⚠ Intent unclear — user must scroll to filter</div>
-            </div>
-          </div>
-        </div>
-        <div class="ba-card ba-after">
-          <div class="ba-label">After: User sets intent first</div>
-          <div class="ba-content">
-            <div class="ba-screen">
-              <div class="ba-filter-row">
-                <div class="ba-filter">All</div>
-                <div class="ba-filter active">Music</div>
-                <div class="ba-filter">Podcasts</div>
-                <div class="ba-filter">Audiobooks</div>
-              </div>
-              <div class="ba-search-bar">true crime</div>
-              <div class="ba-results">
-                <div class="ba-result"><div class="ba-result-icon" style="background:#1DB954">🎵</div><div><div class="ba-result-name">True Crime Playlist</div><div class="ba-result-type">Playlist</div></div></div>
-                <div class="ba-result"><div class="ba-result-icon" style="background:#1DB954">🎵</div><div><div class="ba-result-name">Dark Crime Mix</div><div class="ba-result-type">Playlist</div></div></div>
-                <div class="ba-result"><div class="ba-result-icon" style="background:#1DB954">🎵</div><div><div class="ba-result-name">Crime Scene Radio</div><div class="ba-result-type">Radio</div></div></div>
-              </div>
-            </div>
-          </div>
+  <!-- WORKS WELL -->
+  <div class="tab-panel active" id="tab-works">
+    <div class="sec-label">01 / Strengths</div>
+    <h2>What Spotify gets right.</h2>
+    <div class="works-grid">
+      <div class="works-item">
+        <div class="works-badge">🎯</div>
+        <div>
+          <div class="works-title">Daily Mix & Discover Weekly</div>
+          <div class="works-text">Best-in-class personalization. Low effort, high perceived value, delivered on a predictable schedule users build habits around. The fact that millions of people plan their Monday morning around Discover Weekly refreshing is a product achievement worth studying. This is the benchmark for music app personalization.</div>
+          <div class="works-verdict">✓ Benchmark feature</div>
         </div>
       </div>
-      <div class="insight">
-        <div class="insight-label">The insight</div>
-        <div class="insight-text">The filter persists as a user preference — not reset every session. Set it once, applied everywhere. One upfront decision eliminates friction on every subsequent search. That compounds across millions of searches per day.</div>
+      <div class="works-item">
+        <div class="works-badge">🗺️</div>
+        <div>
+          <div class="works-title">Made For You hub</div>
+          <div class="works-text">Discovery has a permanent, predictable home instead of being buried or reshuffled. Users know exactly where to go. This sounds obvious — most apps still don't do it. The hub creates a consistent mental model that actually makes personalization feel intentional rather than random.</div>
+          <div class="works-verdict">✓ Strong wayfinding</div>
+        </div>
       </div>
-    </div>
-
-    <!-- FIX -->
-    <div class="tab-panel" id="tab-fix">
-      <div class="fix-cards">
-        <div class="fix-card"><div class="fix-title">Persistent content-type filter</div><div class="fix-text">Set once, applied everywhere. Not re-asked on every search. Music / Podcasts / Audiobooks as a user preference, not a query modifier. Reduces cognitive load on every subsequent search session.</div></div>
-        <div class="fix-card"><div class="fix-title">"Why this track" tag</div><div class="fix-text">A lightweight explainability label on algorithmic picks — similar to what TikTok does with its For You signals. "Based on: The National, songs you saved this week." Low build cost, meaningfully higher trust.</div></div>
-        <div class="fix-card"><div class="fix-title">Pinned home layout option</div><div class="fix-text">An opt-in stable layout for power users who want predictability over surprise. The algorithm still runs but the furniture stops moving. Targets a real segment that currently churns to competitors.</div></div>
-      </div>
-      <div class="fix-note">The through-line across all three: reduce the work the user has to do. If a user is compensating for something the interface should handle, that's a product problem worth fixing.</div>
-    </div>
-
-    <!-- PRIORITY -->
-    <div class="tab-panel" id="tab-priority">
-      <table class="pri-table">
-        <thead><tr><th>Idea</th><th>User Impact</th><th>Build Cost</th><th>My call</th></tr></thead>
-        <tbody>
-          <tr><td style="font-weight:700;color:var(--ink)">Persistent search intent filter</td><td><span class="pill pill-h">High</span></td><td>Low</td><td><span class="call">Ship first</span></td></tr>
-          <tr><td style="font-weight:700;color:var(--ink)">"Why this track" explainability</td><td><span class="pill pill-h">High</span></td><td>Medium</td><td><span class="call">Ship second</span></td></tr>
-          <tr><td style="font-weight:700;color:var(--ink)">Pinned home layout option</td><td><span class="pill pill-m">Medium</span></td><td>Medium</td><td><span class="call">Test demand first</span></td></tr>
-        </tbody>
-      </table>
-      <div class="insight" style="margin-top:24px">
-        <div class="insight-label">How I prioritize</div>
-        <div class="insight-text">I ask: does this fix something the user is currently working around? The filter and explainability tag both do. The layout option is real but addresses a smaller specific segment — worth validating demand before committing build time.</div>
+      <div class="works-item">
+        <div class="works-badge">📱</div>
+        <div>
+          <div class="works-title">Cross-device session handoff</div>
+          <div class="works-text">Close the laptop, open your phone — it's still playing at the exact position. This is a genuine engineering and product achievement that users have never consciously noticed, which is exactly the mark of excellent UX. When a feature is invisible it's working perfectly.</div>
+          <div class="works-verdict">✓ Invisible excellence</div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- PROBLEM -->
+  <div class="tab-panel" id="tab-problem">
+    <div class="sec-label">02 / The problem</div>
+    <h2>Where Spotify creates friction.</h2>
+    <p class="prob-intro">Spotify's biggest gap isn't personalization — it's intent. The app is excellent at surfacing what you might like, but poor at understanding what you're trying to do right now. Those are different problems and they require different solutions.</p>
+    <div class="prob-cards">
+      <div class="prob-card">
+        <div class="prob-num">01</div>
+        <div class="prob-title">Search intent is ambiguous</div>
+        <div class="prob-text">Search "true crime" and you get podcasts, playlists, and audiobooks mixed together. Spotify guesses your intent and guesses wrong often enough that users develop workarounds — adding words like "podcast" or "playlist" to force the right result type. That's the user doing work the interface should be doing.</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">02</div>
+        <div class="prob-title">The home screen is unstable</div>
+        <div class="prob-text">The layout reshuffles constantly. Users lose the ability to build a mental map of where things live. A home screen's job is to be predictably navigable. When it moves too often it stops being navigation and becomes discovery — whether the user wanted discovery or not.</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">03</div>
+        <div class="prob-title">Algorithms lack explainability</div>
+        <div class="prob-text">When Discover Weekly surfaces a track there's no signal about why. Users who love the pick have no way to reinforce that signal beyond a save. Users who want to understand the pattern can't. This limits long-term trust and makes the algorithm feel like a black box rather than a collaborator.</div>
+      </div>
+    </div>
+    <div class="prob-deepdive">
+      <div class="pd-label">Deep dive — Problem 01</div>
+      <div class="pd-title">The search intent problem in detail</div>
+      <div class="pd-text">
+        <p>When a user types "true crime" they have a specific intent — podcast, playlist, or audiobook — but Spotify surfaces all three content types in one mixed feed. The user then has to scroll and filter, doing work the product should have handled upfront.</p>
+        <p>The workaround users have developed is telling: they type "true crime podcast" or "true crime playlist" to force a result type. This is a clear signal that the interface is making users compensate for a missing feature. Every time a user adds a qualifier word to a search, that's a product failure hiding in plain sight.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="tab-panel" id="tab-before">
+    <div class="sec-label">03 / Before & after</div>
+    <h2>What the fix actually looks like.</h2>
+    <p class="ba-intro">The core idea: a persistent content-type filter set once by the user and applied everywhere. Not a per-search toggle — a saved preference that follows you across sessions. Here's the difference it makes on a search for "true crime."</p>
+    <div class="ba-wrap">
+      <!-- BEFORE -->
+      <div class="ba-panel ba-before">
+        <div class="ba-label-bar">⚠ Before — intent is guessed</div>
+        <div class="sp-ui">
+          <div class="sp-topbar">
+            <div class="sp-search-box">
+              <span class="sp-search-icon">🔍</span>
+              <span class="sp-search-text">true crime</span>
+            </div>
+          </div>
+          <div class="sp-content">
+            <div class="sp-result-section">
+              <div class="sp-section-label">Top result</div>
+              <div class="sp-result">
+                <div class="sp-result-art" style="background:#8B5CF6">🎙️</div>
+                <div><div class="sp-result-name">Crime Junkie</div><div class="sp-result-type">Podcast</div></div>
+              </div>
+            </div>
+            <div class="sp-result-section">
+              <div class="sp-section-label">Songs</div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#1DB954">🎵</div><div><div class="sp-result-name">True Crime Playlist</div><div class="sp-result-type">Playlist · Spotify</div></div></div>
+            </div>
+            <div class="sp-result-section">
+              <div class="sp-section-label">Podcasts & Shows</div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#E11D48">🎙️</div><div><div class="sp-result-name">My Favorite Murder</div><div class="sp-result-type">Podcast</div></div></div>
+            </div>
+            <div class="sp-result-section">
+              <div class="sp-section-label">Audiobooks</div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#F59E0B">📖</div><div><div class="sp-result-name">True Crime Stories</div><div class="sp-result-type">Audiobook</div></div></div>
+            </div>
+            <div class="sp-confused">⚠ Mixed results — user must scroll and filter manually</div>
+          </div>
+        </div>
+      </div>
+      <!-- AFTER -->
+      <div class="ba-panel ba-after">
+        <div class="ba-label-bar">✓ After — intent is set once</div>
+        <div class="sp-ui">
+          <div class="sp-filter-row">
+            <div class="sp-filter">All</div>
+            <div class="sp-filter">Music</div>
+            <div class="sp-filter active">Podcasts</div>
+            <div class="sp-filter">Audiobooks</div>
+          </div>
+          <div class="sp-topbar">
+            <div class="sp-search-box">
+              <span class="sp-search-icon">🔍</span>
+              <span class="sp-search-text">true crime</span>
+            </div>
+          </div>
+          <div class="sp-content">
+            <div class="sp-result-section">
+              <div class="sp-section-label">Top result</div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#8B5CF6">🎙️</div><div><div class="sp-result-name">Crime Junkie</div><div class="sp-result-type">Podcast · 1.2M followers</div></div></div>
+            </div>
+            <div class="sp-result-section">
+              <div class="sp-section-label">Podcasts</div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#E11D48">🎙️</div><div><div class="sp-result-name">My Favorite Murder</div><div class="sp-result-type">Podcast · Comedy & True Crime</div></div></div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#6366F1">🎙️</div><div><div class="sp-result-name">Serial</div><div class="sp-result-type">Podcast · Investigative Journalism</div></div></div>
+              <div class="sp-result"><div class="sp-result-art" style="background:#0EA5E9">🎙️</div><div><div class="sp-result-name">Casefile True Crime</div><div class="sp-result-type">Podcast · Weekly</div></div></div>
+            </div>
+            <div class="sp-success">✓ Filter saved — applies to all future searches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fix-note" style="background:var(--spotify-bg);border-left-color:var(--spotify);border-radius:12px;padding:20px 24px;font-size:14px;color:var(--ink-2);line-height:1.75">
+      <strong style="color:var(--spotify)">The key insight:</strong> The filter is persistent, not per-search. Set it once, applied everywhere. One upfront decision eliminates friction on every subsequent search. That compounds across millions of searches per day.
+    </div>
+  </div>
+
+  <!-- MY FIX -->
+  <div class="tab-panel" id="tab-fix">
+    <div class="sec-label">04 / The fix</div>
+    <h2>Three things I'd build.</h2>
+    <p class="fix-intro">Each fix targets a specific user behavior that indicates friction — the workaround, the complaint, the churn signal. The common thread: reduce the work the user has to do to get the experience they want.</p>
+    <div class="fix-cards">
+      <div class="fix-card">
+        <div class="fix-icon">🔧</div>
+        <div class="fix-title">Persistent content-type filter</div>
+        <div class="fix-text">Set once, applied everywhere. Music / Podcasts / Audiobooks as a user preference that persists across sessions. Not a per-search toggle — a saved setting that follows you. Reduces the cognitive load on every subsequent search session. This is the highest-leverage fix on the list.</div>
+      </div>
+      <div class="fix-card">
+        <div class="fix-icon">💬</div>
+        <div class="fix-title">"Why this track" explainability</div>
+        <div class="fix-text">A lightweight label on algorithmic picks: "Because you listen to The National" or "Fans of Bon Iver also saved this." Similar to what TikTok does with its For You signals. Low build cost, meaningfully higher trust. Users who understand why a recommendation appeared are more likely to engage with and train the algorithm.</div>
+      </div>
+      <div class="fix-card">
+        <div class="fix-icon">📌</div>
+        <div class="fix-title">Pinned home layout row</div>
+        <div class="fix-text">An opt-in stable section at the top of the home screen for power users who want predictability over surprise. The algorithm still runs everywhere else — this just gives one row a fixed position. Targets a real segment that currently adds qualifiers to searches or churns to Apple Music for the library-first experience.</div>
+      </div>
+    </div>
+    <div class="fix-note">The test I apply to every product decision: is the user compensating for something the interface should handle? If yes, that's a product problem worth fixing. All three fixes above start from a real user workaround.</div>
+  </div>
+
+  <!-- PRIORITY -->
+  <div class="tab-panel" id="tab-priority">
+    <div class="sec-label">05 / Prioritization</div>
+    <h2>What I'd ship first and why.</h2>
+    <p class="pri-intro">Prioritizing by whether the fix addresses an active user workaround. The filter and explainability tag both do. The layout option solves a real problem for a smaller segment — worth validating demand before committing build time.</p>
+    <table class="pri-table">
+      <thead>
+        <tr>
+          <th>Idea</th>
+          <th>User impact</th>
+          <th>Build cost</th>
+          <th>Addresses workaround?</th>
+          <th>My call</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Persistent search intent filter</td>
+          <td><span class="pill pill-h">High</span></td>
+          <td><span class="pill pill-lo">Low</span></td>
+          <td>Yes — users type qualifier words</td>
+          <td><span class="call-1">Ship first</span></td>
+        </tr>
+        <tr>
+          <td>"Why this track" explainability</td>
+          <td><span class="pill pill-h">High</span></td>
+          <td><span class="pill pill-m">Medium</span></td>
+          <td>Yes — users can't train the algorithm</td>
+          <td><span class="call-2">Ship second</span></td>
+        </tr>
+        <tr>
+          <td>Pinned home layout row</td>
+          <td><span class="pill pill-m">Medium</span></td>
+          <td><span class="pill pill-m">Medium</span></td>
+          <td>Partially — some users churn to Apple Music</td>
+          <td><span class="call-3">Test demand first</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pri-insight">
+      <div class="pi-icon">📡</div>
+      <div>
+        <div class="pi-label">How I prioritize</div>
+        <div class="pi-text">I ask one question first: is the user already doing something to work around this? If yes, that's validated demand — the problem is real and users care enough to compensate for it. The search filter has the clearest workaround signal (users add qualifier words to searches), which is why it goes first. The layout option has a real but smaller signal (churn to Apple Music), which is why I'd test demand before building.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
 </div>
 
 <footer class="footer">
@@ -257,8 +533,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
   });
 });
-const ro = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: .08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 </script>
 </body>
 </html>
